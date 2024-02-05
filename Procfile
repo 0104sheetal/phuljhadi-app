@@ -1,1 +1,0 @@
-web: node extensions/order-discount-extension/src/index.js
