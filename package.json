@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "UNLICENSED",
   "scripts": {
+    "start": "node extensions/order-discount-extension/src/index.js",
     "shopify": "shopify",
     "build": "shopify app build",
     "dev": "shopify app dev",
