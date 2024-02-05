@@ -23,7 +23,7 @@ app.post('/webhooks/cart/update', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-   res.send('Hello, World!');
+   res.send('Phuljhadi Custom Discount App!');
 });
 
 const port = process.env.PORT || 3000;
