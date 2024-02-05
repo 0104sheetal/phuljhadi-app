@@ -1,9 +1,7 @@
-// Import required modules
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-// Parse JSON request bodies
 app.use(bodyParser.json());
 
 // Define a route to handle the cart update webhook
@@ -24,7 +22,10 @@ app.post('/webhooks/cart/update', (req, res) => {
   res.status(200).end();
 });
 
-// Start the server
+app.get('/', (req, res) => {
+   res.send('Hello, World!');
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
