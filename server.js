@@ -4,21 +4,18 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// Define a route to handle the cart update webhook
+const { run } = require('./extensions/order-discount-extension/src/run');
+
 app.post('/webhooks/cart/update', (req, res) => {
-  // Handle the cart update event here
-  const cartUpdateData = req.body; // This will contain information about the cart update
+  const cartUpdateData = req.body; 
 
-  // Add a console log to indicate that the webhook was triggered
-  console.log('Webhook received - Cart Update Event');
+  const timestamp = new Date().toISOString();
+  console.log(`Webhook received - Cart Update Event at ${timestamp}`);
 
-  // Trigger your discount calculation logic from 'run.js' here
   const discountResult = run(cartUpdateData);
 
-  // Add a console log to indicate that the discount calculation logic was executed
-  console.log('Discount calculation logic executed:', discountResult);
+  console.log(`Discount calculation logic executed at ${timestamp}:`, discountResult);
 
-  // Respond with a 200 OK status to acknowledge receipt of the webhook
   res.status(200).end();
 });
 
