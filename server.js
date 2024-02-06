@@ -1,4 +1,6 @@
 const express = require('express');
+
+console.log("Updated");
 const bodyParser = require('body-parser');
 const { run } = require('./extensions/order-discount-extension/src/run'); // Correct path to run.js
 
