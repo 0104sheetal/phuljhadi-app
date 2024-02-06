@@ -9,6 +9,7 @@ app.use(bodyParser.json()); // for parsing application/json
 // Webhook endpoint for cart updates
 app.post('/webhook/cart-update', async (req, res) => {
   try {
+    console.log("Cart Update")
     const cartData = req.body; // This is the cart data from Shopify's webhook
     const discountResult = run(cartData); // Apply your discount logic from run.js
     res.json(discountResult); // Respond with the discount result
