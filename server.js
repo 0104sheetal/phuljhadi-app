@@ -1,48 +1,29 @@
 const express = require('express');
+
+console.log("Updated");
 const bodyParser = require('body-parser');
-const crypto = require('crypto');
+const { run } = require('./extensions/order-discount-extension/src/run'); // Correct path to run.js
 
 const app = express();
 
-// Replace 'SHOPIFY_SHARED_SECRET' with your actual Shopify shared secret
-const SHOPIFY_SHARED_SECRET = 'your_shared_secret_here';
+app.use(bodyParser.json()); // for parsing application/json
 
-// Body parser middleware to handle JSON payloads and raw body for verification
-app.use(bodyParser.json({
-  verify: function(req, res, buf) {
-    req.rawBody = buf;
-  }
-}));
-
-// Route for Shopify webhooks
-app.post('/webhook', (req, res) => {
-  const hmacHeader = req.get('X-Shopify-Hmac-Sha256');
-  const generatedHash = crypto
-    .createHmac('sha256', SHOPIFY_SHARED_SECRET)
-    .update(req.rawBody, 'utf8')
-    .digest('base64');
-
-  if (generatedHash === hmacHeader) {
-    // The webhook is verified
-    console.log('Webhook verified and received:', req.body);
-
-    // Here you would handle the checkout update, apply discounts, etc.
-    // Add your custom logic here
-
-    res.status(200).send('Webhook processed');
-  } else {
-    // If the HMAC verification fails
-    console.log('Webhook verification failed');
-    res.status(403).send('Forbidden');
+// Webhook endpoint for cart updates
+app.post('/webhook/cart-update', async (req, res) => {
+  try {
+    const cartData = req.body; // This is the cart data from Shopify's webhook
+    const discountResult = run(cartData); // Apply your discount logic from run.js
+    res.json(discountResult); // Respond with the discount result
+  } catch (error) {
+    console.error('Error processing the cart update webhook:', error);
+    res.status(500).send('Internal Server Error');
   }
 });
 
-// Default route for the root
 app.get('/', (req, res) => {
-  res.send('Phuljhadi Custom Discount App!!');
+  res.send('Phuljhadi Custom Discount App!');
 });
 
-// Start the server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
