@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@shopify/shopify_function": "0.1.0",
+    "typescript": "^5.3.3",
     "javy": "0.1.1"
   }
 }
