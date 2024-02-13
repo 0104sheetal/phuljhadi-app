@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "./extensions/order-discount-extension/generated", // Output directory for compiled JavaScript files
+    "rootDir": "./extensions/order-discount-extension", // Root directory of source TypeScript files
+    "sourceMap": true, // Optional: Enable source map generation
+    "removeComments": true // Optional: Remove comments in the output
+  },
+  "include": [
+    "extensions/order-discount-extension/**/*.ts" // Include all TypeScript files in the project for compilation
+  ],
+  "exclude": [
+    "node_modules" // Exclude the node_modules directory
+  ]
+}
