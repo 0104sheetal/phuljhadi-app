@@ -30,7 +30,7 @@ app.post('/webhook', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Phuljhadi Custom Discount App!');
+  res.send('Phuljhadi Custom Discount App!!!');
 });
 
 const port = process.env.PORT || 3000;
